@@ -1,0 +1,1308 @@
+---
+title: 'FLUXO CIRCULAR DA RENDA E AGREGADOS MACROECONÔMICOS </br> (AULA 03)'
+subtitle: 'ADM03F - Macroeconomia'
+author: 'Autor: Victor Valerio'
+date: 'Última atualização: `r format(Sys.Date(),"%d-%m-%Y")`'
+output:
+  xaringan::moon_reader:
+    css: [xaringan-themer.css]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+---
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+
+
+library(xaringanthemer)
+
+
+style_mono_light(base_color = '#23395b')
+
+
+```
+
+
+```{r , echo=FALSE}
+ 
+
+xaringanExtra::use_scribble()
+
+
+xaringanExtra::use_search(show_icon = TRUE)
+
+
+```
+
+
+## TÓPICOS ABORDADOS
+
+
+</br>
+
+
+- [**INTRODUÇÃO**](#introducao)
+
+
+</br>
+
+
+- [**PRODUTO INTERNO BRUTO (PIB)**](#pib)
+
+
+</br>
+
+
+- [**FLUXO CIRCULAR DA RENDA (SIMPLIFICADO)**](#fcr_simplificado)
+
+
+</br>
+
+
+- [**FLUXO CIRCULAR DA RENDA (AMPLIADO)**](#fcr_ampliado)
+
+
+
+
+
+---
+class: inverse, center, middle 
+name: introducao
+
+
+## INTRODUÇÃO
+
+
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+**CONCEITOS**
+
+
+</br>
+  
+  
+- Para entender o funcionamento básico da economia de um país é útil iniciar a apresentação por meio 
+da definição de 3 conceitos iniciais da macroeconomia, são eles:
+  
+</br>
+
+  - **PRODUTO AGREGADO** (OU OFERTA AGREGADA);
+  
+  - **RENDA AGREGADA**;
+  
+  - **DEMANDA AGREGADA** (OU DESPESA AGREGADA/CONSUMO AGREGADO).
+  
+  
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+**CONCEITOS**
+
+
+</br>
+  
+  
+- **PRODUTO AGREGADO**: Corresponde a **soma de valores (R$)** de todos os **bens (ou serviços) finais** 
+produzidos em um determinado **país** em um determinado **período de tempo** (**variável de fluxo**).
+
+
+</br>
+
+
+$$ Produto \ Agregado = \sum_{x = 1}^{n}P_iQ_i$$
+
+
+- Variáveis:
+
+  - $P_i =$ Preço do **bem (ou serviço) final** i;
+  
+  - $Q_i =$ Quantidade produzida do **bem (ou serviço) final** i;
+  
+  - $i =$ **bem (ou serviço) final** $(i = 1, 2, 3, ..., n)$
+  
+  
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+**CONCEITOS**
+
+
+</br>
+
+
+- **BEM (OU SERVIÇO) FINAL**: São bens e serviços que **não são utilizados** em nenhuma etapa de um 
+processo de produção, isto é, não são insumos de produção. 
+
+
+</br>
+
+
+- **BEM (OU SERVIÇO) INTERMEDIÁRIO**: São bens e serviços que **são utilizados** em nenhuma etapa de um 
+processo de produção, isto é, são insumos de produção. 
+
+
+</br>
+
+
+- Para entender melhor a definição de produto agregado, bens finais e bens intermediários, vamos 
+partir de um exemplo teórico de uma economia que produz apenas um bem final: o pão.
+
+
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+**PREMISSAS DO EXEMPLO**
+
+
+  - **3 Processos Produtivos**: Produção de Trigo, Produção de Farinha de Trigo e 
+  Produção de Pão;
+  
+  - **Bens Intermediários**: Trigo e Farinha (são insumos de produção);
+  
+  - **Bens Finais**: Pão (não é insumo de produção).
+
+
+```{r , results = 'asis', echo = F, warning = F, message = F, error = F, fig.align ='center', out.width = '100%'}
+
+
+library(magrittr)
+
+
+library(kableExtra)
+
+
+cronograma <- data.frame(
+  
+  a = c('TRIGO', 'FARINHA', 'PÃO'),
+  
+  b = c('R$ 0', 'R$ 15', 'R$ 15'),
+  
+  c = c('R$ 15', 'R$ 35', 'R$ 60'),
+  
+  d = c('R$ 15', 'R$ 20', 'R$ 25'))
+
+knitr::kable(cronograma, 
+             
+             escape = FALSE,
+    
+             format = 'html',
+             
+             col.names = c('PRODUTO', 'PREÇO DO INSUMO (custo de produção)', 
+                           
+                           'PREÇO DO PRODUTO (preço de venda)', 
+                           
+                           'VALOR ADICIONADO (valor agregado)'),
+             
+             align = c('c', 'c', 'c', 'c')) %>%
+  
+  kable_styling(bootstrap_options = 'striped')
+  
+
+```
+
+
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+```{r , results = 'asis', echo = F, warning = F, message = F, error = F, fig.align ='center', out.width = '100%'}
+
+
+library(magrittr)
+
+
+library(kableExtra)
+
+
+cronograma <- data.frame(
+  
+  a = c('TRIGO', 'FARINHA', 'PÃO'),
+  
+  b = c('R$ 0', 'R$ 15', 'R$ 15'),
+  
+  c = c('R$ 15', 'R$ 35', 'R$ 60'),
+  
+  d = c('R$ 15', 'R$ 20', 'R$ 25'))
+
+knitr::kable(cronograma, 
+             
+             escape = FALSE,
+    
+             format = 'html',
+             
+             col.names = c('PRODUTO', 'PREÇO DO INSUMO (custo de produção)', 
+                           
+                           'PREÇO DO PRODUTO (preço de venda)', 
+                           
+                           'VALOR ADICIONADO (valor agregado)'),
+             
+             align = c('c', 'c', 'c', 'c')) %>%
+  
+  kable_styling(bootstrap_options = 'striped')
+  
+
+```
+
+
+**DEFINIÇÕES**
+
+
+  - Como existem 3 processos produtivos, também existem **3 custos de produção** e 3 **preços de venda**
+  (um para cada processo produtivo);
+  
+  
+  - O custo de produção de um processo de produção é, justamente, igual ao preço de venda do processo
+  de produção anterior (ou processo de produção fornecedor);
+
+  
+  - Em cada processo de produção, a **diferença entre o preço de venda e o custo de produção** gera o 
+  respectivo **valor adicionado** (ou valor agregado).
+  
+
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+```{r , results = 'asis', echo = F, warning = F, message = F, error = F, fig.align ='center', out.width = '100%'}
+
+
+library(magrittr)
+
+
+library(kableExtra)
+
+
+cronograma <- data.frame(
+  
+  a = c('TRIGO', 'FARINHA', 'PÃO'),
+  
+  b = c('R$ 0', 'R$ 15', 'R$ 15'),
+  
+  c = c('R$ 15', 'R$ 35', 'R$ 60'),
+  
+  d = c('R$ 15', 'R$ 20', 'R$ 25'))
+
+knitr::kable(cronograma, 
+             
+             escape = FALSE,
+    
+             format = 'html',
+             
+             col.names = c('PRODUTO', 'PREÇO DO INSUMO (custo de produção)', 
+                           
+                           'PREÇO DO PRODUTO (preço de venda)', 
+                           
+                           'VALOR ADICIONADO (valor agregado)'),
+             
+             align = c('c', 'c', 'c', 'c')) %>%
+  
+  kable_styling(bootstrap_options = 'striped')
+  
+
+```
+
+
+**DEFINIÇÕES**
+
+
+  - O valor de venda de um processo de produção é igual a soma entre o custo de produção e o 
+  valor adicionado do respectivo processo;
+  
+  
+  - Por sua vez, como visto, o custo de produção de um processo produtivo é igual ao valor de venda 
+  do processo de produção anterior (ou do processo de produção do fornecedor). Assim, o valor de venda
+  de um produto já leva em consideração os valores de venda dos processos produtivos anteriores;
+
+  
+  - Por este motivo, o Produto Agregado não soma os valores de venda de cada produto, evitando o erro
+  da **dupla contagem**.
+  
+  
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+```{r , results = 'asis', echo = F, warning = F, message = F, error = F, fig.align ='center', out.width = '100%'}
+
+
+library(magrittr)
+
+
+library(kableExtra)
+
+
+cronograma <- data.frame(
+  
+  a = c('TRIGO', 'FARINHA', 'PÃO'),
+  
+  b = c('R$ 0', 'R$ 15', 'R$ 15'),
+  
+  c = c('R$ 15', 'R$ 35', 'R$ 60'),
+  
+  d = c('R$ 15', 'R$ 20', 'R$ 25'))
+
+knitr::kable(cronograma, 
+             
+             escape = FALSE,
+    
+             format = 'html',
+             
+             col.names = c('PRODUTO', 'PREÇO DO INSUMO (custo de produção)', 
+                           
+                           'PREÇO DO PRODUTO (preço de venda)', 
+                           
+                           'VALOR ADICIONADO (valor agregado)'),
+             
+             align = c('c', 'c', 'c', 'c')) %>%
+  
+  kable_styling(bootstrap_options = 'striped')
+  
+
+```
+
+
+**DEFINIÇÕES**
+
+
+- No exemplo do pão, ao se somar os valores totais de produção de cada processo produtivo temos que:
+    
+    - O valor total do processo produtivo trigo é somado três vezes;
+    
+    - O valor total do processo produtivo da farinha é somado duas vezes;
+    
+    
+- Este é justamente o exemplo já explicado erro de **dupla contagem**.
+
+
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+```{r , results = 'asis', echo = F, warning = F, message = F, error = F, fig.align ='center', out.width = '100%'}
+
+
+library(magrittr)
+
+
+library(kableExtra)
+
+
+cronograma <- data.frame(
+  
+  a = c('TRIGO', 'FARINHA', 'PÃO'),
+  
+  b = c('R$ 0', 'R$ 15', 'R$ 15'),
+  
+  c = c('R$ 15', 'R$ 35', 'R$ 60'),
+  
+  d = c('R$ 15', 'R$ 20', 'R$ 25'))
+
+knitr::kable(cronograma, 
+             
+             escape = FALSE,
+    
+             format = 'html',
+             
+             col.names = c('PRODUTO', 'PREÇO DO INSUMO (custo de produção)', 
+                           
+                           'PREÇO DO PRODUTO (preço de venda)', 
+                           
+                           'VALOR ADICIONADO (valor agregado)'),
+             
+             align = c('c', 'c', 'c', 'c')) %>%
+  
+  kable_styling(bootstrap_options = 'striped')
+  
+
+```
+
+
+**DEFINIÇÕES**
+
+
+- Também podemos depreender que o valor total do processo produtivo do único bem final 
+do exemplo, o pão, já leva em consideração todos os valores adicionados em cada processo produtivo 
+(sendo que, no caso do trigo, o valor adicionado é o próprio valor de venda pois não há custo de 
+produção);
+
+
+- Assim, ao mesmo tempo que todas as contribuições para produção em cada processo produtivo são 
+consideradas, não incorremos no erro da dupla contagem;
+
+
+- Neste contexto, acabamos de representar uma nova **abordagem para cálculo do produto agregado**, 
+justamente, a partir da **soma do valor adicionado em cada processo de produção**.
+  
+  
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+</br>
+
+- Em uma economia real não existem apenas três processos, mas uma **infinidade processos de produção
+de diferentes setores econômicos**. Isto pode dificultar a definição de qual produto é intermediário 
+e qual produto é final;
+
+
+</br>
+
+
+- Uma maneira alternativa de mensurar o **Produto Agregado** é utilizar a referida **soma dos valor 
+adicionados (ou, valores agregados)**;
+
+
+</br>
+
+
+- Vale relembrar que valor adicionado (ou valor agregado) corresponde ao valor acrescido (ou gerado) 
+em um determinado bem (ou serviço) devido a realização de algum procedimento produtivo.
+
+
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+</br>
+
+
+- Uma vez entendido o conceito de produto agregado, pode-se passar à explicação de renda agregada;
+
+
+</br>
+
+
+- **Renda Agregada: Corresponde a soma de valores (R$) de todas as remuneração dos fatores de
+produção em uma determinada economia**;
+
+
+</br>
+
+
+- Inicialmente este conceito é pouco esclarecedor e uma revisão de algumas definições microeconômicas 
+são necessárias para seu melhor entendimento.
+
+
+
+---
+class: inverse
+<div style="text-align: justify">
+
+
+## REVISÃO DE MICROECONOMIA
+
+
+- Os FATORES DE PRODUÇÃO são os recursos (ou insumos) utilizados no processo de produção, exemplo:
+
+
+_Para produzir, o dono de uma empresa precisa escolher um local para realizar as atividades (esse 
+local é um recurso), pessoas para executar as atividades (esses trabalhadores são recursos), o dono 
+da empresa pode realizar um empréstimo para comprar uma máquina (este dinheiro é um recurso). Estas 
+são escolhas mínimas de um empresário (e sua administração também é um recurso)._
+
+
+</br>
+
+- Por sua vez, o detentores dos recursos (ou insumos) devem ser remunerados pela utilização e a 
+remuneração de cada fato de produção recebe um nome diferente, são eles:
+
+    - A remuneração pelo USO DO LOCAL (capital físico) é o ALUGUEL;
+    - A remuneração pelo USO DO TRABALHO é o SALÁRIO;
+    - A remuneração pelo USO DO EMPRÉSTIMO (capital monetário) é o JUROS;
+    - A remuneração pelo USO DA ADMINISTRAÇÃO (RISCO) é o LUCRO.
+
+
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+- Voltando ao conceito de renda agregada:
+
+  - Corresponde a soma de valores (R$) de todas as remuneração dos fatores de produção em uma 
+  determinada economia;
+  
+  
+</br>
+  
+  
+$$Renda \ Agregada = \sum_{}^{}Aluguéis + \sum_{}^{}Salários + \sum_{}^{}Juros + \sum_{}^{}Lucros$$
+
+
+- Variáveis:
+
+  - $Aluguéis$: remuneração pelo uso do capital físico;
+  
+  - $Salários$: remuneração pelo uso do trabalho;
+  
+  - $Juros$: remuneração pelo uso do capital monetário;
+  
+  - $Lucros$: remuneração pelo uso da administração (risco incorrido) pelo empresário.
+  
+  
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+</br>
+
+
+- Como se pode depreender, o valor agregado em um processo de produção corresponde ao valor 
+necessário para remunerar todos os envolvidos na etapa produtiva;
+
+
+</br>
+
+
+- Portanto, a **renda de cada processo de produção é igual ao valor agregado em cada processo de 
+produção**;
+
+
+</br>
+
+
+- Com base no descrito, a associação entre produto e renda se torna imediata.
+
+
+---
+<div style="text-align: justify">
+
+
+- **PRODUTO AGREGADO (Abordagem 1)**: Soma de todos os valores (R$) dos bens finais produzidos em uma 
+economia em um período;
+
+
+</br>
+
+
+- **PRODUTO AGREGADO (Abordagem 2)**: Soma de todos os valores agregados (R$) em uma economia em um 
+período;
+
+
+</br>
+
+
+- **RENDA AGREGADO (Abordagem 1)** a soma de valores (R$) de todas as remuneração dos fatores de 
+produção em uma determinada economia;
+
+
+</br>
+
+
+- **RENDA AGREGADO (Abordagem 2)** Soma de todos os valores agregados (R$) em uma economia em um 
+período;
+
+
+</br>
+
+
+<div style="text-align: center">
+
+
+## PRODUTO AGREGADO = RENDA AGREGADA
+
+
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+- Agora, basta compreendermos o último conceito inicial de macroeconomia, mais especificamente, o 
+de **demanda agregada**;
+
+
+</br>
+
+
+- **Demanda Agregada corresponde a soma dos valores (R$) de todos os consumos de bens finais realizados
+em uma economia em determinado período de tempo;**
+
+
+</br>
+
+
+- Este conceito é imediato e também **pode ser associado aos conceitos de produto agregado e renda 
+agregada**.
+
+
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+- Para **consumir** um bem (ou serviço) final é necessário **alocar a renda** para pagar a transação.
+
+  - Os donos de locais conseguem pagar o consumo com as rendas de aluguéis;
+  
+	- Os trabalhadores conseguem pagar o consumo com as rendas de salários;
+	
+	- Os banqueiros conseguem pagar o consumo com as rendas de juros;
+	
+	- Os empresários conseguem pagar o consumo com as rendas de lucros.
+	
+	
+</br>
+
+
+- Supondo que toda a renda conseguida seja alocada em consumo de bens finais, tem-se que:
+
+
+<div style="text-align: center">
+
+
+### PRODUTO AGREGADO = RENDA AGREGADA = DEMANDA AGREGADA
+
+
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+- A expressão abaixo é chamada de identidade contábil macroeconômica (não se trata de uma relação 
+de causa e efeito, mas apenas de uma identidade de valores);
+
+
+<div style="text-align: center">
+
+###PRODUTO AGREGADO = RENDA AGREGADA = DEMANDA AGREGADA
+
+</br>
+<div style="text-align: justify">
+
+- Devido a identidade contábil, pode-se afirmar que é possível mensurar o produto agregado por meio 
+de 3 óticas: 
+
+  - **Ótica do Produto**: Soma dos bens finais produzidos em um país em um determinado período de tempo;
+  
+  - **Ótica da Renda**: Soma das rendas obtidos a partir do uso dos fatores de produção de um país em 
+  um determinado período de tempo;
+  
+  - **Ótica da Demanda**: soma de todos os consumos de bens e serviços finais de uma economia em um 
+  determinado período de tempo. 
+  
+  
+---
+class: inverse, center, middle 
+name: pib
+
+
+## PRODUTO INTERNO BRUTO </br> (PIB)
+
+
+---
+<div style="text-align: justify">
+
+
+## PRODUTO INTERNO BRUTO (PIB)
+
+
+**CONCEITO**
+
+
+</br>
+
+- O conceito de **Produto Interno Bruto (PIB)** é largamente comentado no nosso dia a dia e, como se
+pode esperar, está intimamente associado ao conceito de **Produto Agregado**. Antes de realizar esta
+associação é necessário compreender dois conceitos adicionais, são eles:
+
+  - **Residentes**: Território geográfico em que o interesse econômico do agente é predominante (por
+  exemplo, uma empresa cuja matriz é brasileira e, além disso, opera dentro do território nacional 
+  é considerada residente no Brasil);
+  
+  - **Não Residentes**: Território geográfico em que o interesse econômico não é predominante (por
+  exemplo, uma empresa brasileira cuja matriz é brasileira e, além disso, possui uma filial operando 
+  em outro país é considerada residente no Brasil).
+  
+  
+---
+<div style="text-align: justify">
+
+
+## PRODUTO INTERNO BRUTO (PIB)
+
+
+**CONCEITO**
+
+
+</br>
+
+- Assim, o **Produto Interno Bruto** corresponde a uma **abordagem do cálculo do produto agregado** em 
+que não são discriminados quais os fatores de produção residentes e quais os fatores de produção não 
+residentes (**o foco está no território nacional**);
+
+
+</br>
+
+
+- Obviamente, é chamado **interno** pois o **valor agregado foi gerado por fatores de produção em 
+operação no território brasileiro** (sem ser necessariamente de brasileiros, isto é, sem ser de 
+residentes). 
+
+
+---
+<div style="text-align: justify">
+
+
+## PRODUTO INTERNO BRUTO (PIB)
+
+
+**CONCEITO**
+
+
+</br>
+
+
+- Por seu turno, o **Produto Nacional Bruto** (mais chamado de **Renda Nacional Bruta**) corresponde 
+a uma abordagem do cálculo do produto agregado em que são discriminados quais os fatores de produção
+residentes e quais os fatores de produção não residentes;
+
+
+</br>
+
+
+- Neste caso, é considerado apenas os fatores de produção de residentes, mesmo que estes fatores de 
+produção não estejam operando no Brasil.
+
+
+---
+<div style="text-align: justify">
+
+
+## PRODUTO INTERNO BRUTO (PIB)
+
+
+**QUADRO SÍNTESE**
+
+</br>
+
+
+```{r , results = 'asis', echo = F, warning = F, message = F, error = F, fig.align ='center', out.width = '100%'}
+
+
+library(magrittr)
+
+
+library(kableExtra)
+
+
+cronograma <- data.frame(
+  
+  a = c('ABORDAGEM', 'ABORDAGEM'),
+  
+  b = c('Considera todos os fatores de produção em operação no território nacional', 
+        
+        'Portanto, não leva em consideração a residência'),
+  
+  c = c('Considera apenas os fatores de produção de residentes em operação', 
+        
+        'Portanto, não levam em consideração se operam no território nacional'))
+
+knitr::kable(cronograma, 
+             
+             escape = FALSE,
+    
+             format = 'html',
+             
+             col.names = c('',
+                           
+                           'PRODUTO INTERNO BRUTO', 
+                           
+                           'RENDA NACIONAL BRUTA'),
+             
+             align = c('l', 'l')) %>%
+  
+  kable_styling(bootstrap_options = 'striped')
+  
+
+```
+
+  
+---
+class: inverse, center, middle 
+name: fcr_simplificado
+
+
+## FLUXO CIRCULAR DA RENDA </br> (SIMPLIFICADO)
+
+
+---
+<div style="text-align: justify">
+
+
+## FLUXO CIRCULAR DA RENDA (SIMPLIFICADO)
+
+
+**CONCEITO**
+
+
+</br>
+
+
+- O Fluxo Circular da Renda é um instrumento didático complementar aos conceitos básicos apresentados
+na introdução desta aula;
+
+
+</br>
+
+
+- Além de apresentar as relações acima, são adicionadas informações sobre a participação de alguns 
+setores institucionais;
+
+
+</br>
+
+
+- **Fluxo Circular da Renda: Diagrama que possui o objetivo de identificar quais as principais 
+transações econômicas (que foram originadas no processo de produção) realizadas entre os setores 
+institucionais.**
+
+---
+<div style="text-align: justify">
+
+
+## FLUXO CIRCULAR DA RENDA (SIMPLIFICADO)
+
+
+**CONCEITO**
+
+
+</br>
+
+
+- Mais uma vez, o conceito de Fluxo Circular da Renda não se explica por si só. Torna-se necessário 
+realizar algumas definições adicionais. Quais sejam:
+
+
+</br>
+
+
+- **Unidade Institucional**: Unidade econômica que pode contrair ativos e/ou passivos ao 
+realizar alguma atividade econômica e que também pode realizar transações com outras unidades 
+institucionais;
+
+
+</br>
+
+
+- **Setor Institucional**: Agrupamento de unidades institucionais que possuem o mesmo comportamento, 
+função e objetivos econômicos.
+
+
+
+---
+<div style="text-align: justify">
+
+
+## FLUXO CIRCULAR DA RENDA (SIMPLIFICADO)
+
+
+**CONCEITO**
+
+
+</br>
+
+
+- Por uma classificação mais teórica, existem 4 setores institucionais:
+
+
+</br>
+
+
+- **Famílias**: são indivíduos (ou grupos de indivíduos) que obtêm a sua renda sem serem 
+inscritas no Cadastro Nacional de Pessoa Jurídica (CNPJ), ou seja, são majoritariamente pessoas 
+físicas. Em geral, são os assalariados, trabalhadores autônomos;
+
+
+</br>
+
+
+- **Empresas**: As empresas são unidades legais (a existência é reconhecida em lei, 
+independente dos seus controladores), ou seja, são pessoas jurídicas que desempenham a atividade
+de produção de bens e serviços no mercado. Isto é, deve haver uma prática de preços que seja 
+significativa.
+
+
+---
+<div style="text-align: justify">
+
+
+## FLUXO CIRCULAR DA RENDA (SIMPLIFICADO)
+
+
+**CONCEITO**
+
+
+</br>
+
+
+- **Governo**: Instituições públicas que desempenham a atividade de produção de bens e serviços não 
+mercantis voltados para à coletividade e/ou voltados à repatição da renda e do patrimônio. São bens 
+e serviços não mercantis aqueles que são prestados e/ou consumidos de forma gratuita ou semigratuita
+e, neste sentido, a principal fonte de obtenção de renda destas instituições consite no pagamento 
+obrigatório de tributos efetuado por todos os outros setores institucionais;
+
+
+</br>
+
+
+- **Resto do Mundo**: Todos os setores institucionais podem ser nacionais (chamados de residentes) 
+ou estrangeiros (chamados de não residentes), estes setores institucionais impactam nas atividades 
+produtivas um dos outros e realizam transações entre si. É chamado de “resto do mundo” pois não 
+importa a nacionalidade dos estrangeiros (não residentes), basta saber que não são nacionais 
+(residentes)
+
+
+---
+<div style="text-align: justify">
+
+
+## FLUXO CIRCULAR DA RENDA (SIMPLIFICADO)
+
+
+**CONCEITO**
+
+
+</br>
+
+
+- Uma vez realizadas todas essas definições, pode-se apresentar o Fluxo Circular da Renda;
+
+
+</br>
+
+
+- Em sua versão simplificada, tem-se os seguintes pressupostos:
+
+	- **Existem apenas 2 setores institucionais: Famílias e Empresas**;
+
+	- **Toda a renda das famílias é alocada para consumo de bens e serviços finais**;
+	
+	- **O único fator de produção das empresas são os trabalhadores (famílias)**;
+
+
+---
+class: inverse
+
+
+## FLUXO CIRCULAR DA RENDA (SIMPLIFICADO)
+
+
+```{r, echo = F, warning = F, message = F, error = F, out.width= '80%', fig.align = 'center'}
+
+
+
+knitr::include_graphics('fcr_simplificado.png', dpi = 300)
+
+
+
+```
+
+
+
+---
+<div style="text-align: justify">
+
+
+## FLUXO CIRCULAR DA RENDA (SIMPLIFICADO)
+
+
+**CONCEITO**
+
+
+</br>
+
+
+- As transações realizadas entre os setores institucionais famílias e empresas ocorrem em dois 
+ambientes específicos: o mercado de trabalho e o mercado de bens e serviços;
+
+
+</br>
+
+
+- No mercado de trabalho as famílias são ofertantes de trabalho, as empresas são as demandantes de 
+ trabalho e o preço do trabalho é o salário que é negociado entre estes setores institucionais;
+
+
+</br>
+
+
+- No mercado de bens (ou serviços), as empresas são ofertantes de produtos e as famílias são 
+consumidoras destes produtos, sendo que, para cada produto um determinado preço é negociado.
+
+
+---
+<div style="text-align: justify">
+
+
+## FLUXO CIRCULAR DA RENDA (SIMPLIFICADO)
+
+
+**EQUACIONAMENTO**
+
+
+</br>
+
+
+- Combinando as óticas de Produto Agregado e Demanda Agregada, tem-se:
+
+
+</br>
+  
+  
+$$Produto \ Interno \ Bruto \ (Y) = Consumo das Famílias \ (C)$$
+
+
+- Variáveis:
+
+  - $Y$: Produto Interno Bruto;
+  
+  - $C$: Consumo das Famílias;
+
+
+---
+class: inverse, center, middle 
+name: fcr_ampliado
+
+
+## FLUXO CIRCULAR DA RENDA </br> (AMPLIADO)
+
+
+---
+<div style="text-align: justify">
+
+
+## FLUXO CIRCULAR DA RENDA (AMPLIADO)
+
+
+**CONCEITO**
+
+
+</br>
+
+
+- Em sua versão ampliada, tem-se os seguintes pressupostos adicionados:
+
+	- **As famílias podem poupar parte da renda obtida a partir dos salários**;
+	
+	- **As famílias podem buscar empréstimos e financiamentos**. 
+
+	- **As empresas podem produzir bens e serviços finais e intermediários**;
+	
+	- **As empresas podem buscar empréstimos e financiamentos**. 
+
+
+---
+class: inverse
+
+
+## FLUXO CIRCULAR DA RENDA (AMPLIADO)
+
+
+```{r, echo = F, warning = F, message = F, error = F, out.width= '100%', fig.align = 'center'}
+
+
+
+knitr::include_graphics('fcr_ampliado.png', dpi = 300)
+
+
+
+```
+  
+  
+  
+---
+<div style="text-align: justify">
+
+
+## FLUXO CIRCULAR DA RENDA (AMPLIADO)
+
+
+**CONCEITO**
+
+
+</br>
+
+
+- Ao adicionar tais premissas, cria-se um novo mercado em que as operações financeiras possuem o 
+potencial de impulsionar o crescimento econômico do país. Uma vez que recursos ociosos de agentes 
+superavitários são alocados para agentes deficitários (como é o caso do investimento em máquinas e 
+equipamentos a partir de empréstimos).
+
+
+---
+<div style="text-align: justify">
+
+
+## FLUXO CIRCULAR DA RENDA (AMPLIADO)
+
+
+**EQUACIONAMENTO**
+
+
+</br>
+
+
+- Combinando as óticas de Produto Agregado e Demanda Agregada, tem-se:
+
+
+</br>
+  
+  
+$$Produto \ Interno \ Bruto \ (Y) = Consumo das Famílias \ (C) + Investimento  \ das  \ Empresas \ (I)$$
+</br>
+
+- Variáveis:
+
+  - $Y$: Produto Interno Bruto;
+  
+  - $C$: Consumo das Famílias;
+  
+  - $I$: Investimento das Empresas;
+  
+  
+---
+<div style="text-align: justify">
+
+
+## FLUXO CIRCULAR DA RENDA (AMPLIADO)
+
+
+**COMPLETANDO O MODELO**
+
+
+- Ao adicionar os demais setores institucionais e combinar com as óticas de Produto Agregado e 
+Demanda Agregada, tem-se:
+
+  
+  
+$$Y = C + I + G + X - M$$
+
+- Variáveis:
+
+  - $Y$: Produto Interno Bruto;
+  
+  - $C$: Consumo das Famílias;
+  
+  - $I$: Investimento das Empresas;
+  
+  - $G$: Gastos do Governo;
+
+  - $X$: Exportações;
+  
+  - $M$: Importações.
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
