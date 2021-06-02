@@ -1,5 +1,5 @@
 ---
-title: 'FLUXO CIRCULAR DA RENDA E AGREGADOS MACROECONÔMICOS </br> (AULA 03)'
+title: 'TAXA DE INFLAÇÃO </br> (AULA 06)'
 subtitle: 'ADM03F - Macroeconomia'
 author: 'Autor: Victor Valerio'
 date: 'Última atualização: `r format(Sys.Date(),"%d-%m-%Y")`'
@@ -1035,15 +1035,6 @@ class: inverse
 ## FLUXO CIRCULAR DA RENDA (SIMPLIFICADO)
 
 
-```{r, echo = F, warning = F, message = F, error = F, out.width= '80%', fig.align = 'center'}
-
-
-
-knitr::include_graphics('fcr_simplificado.png', dpi = 300)
-
-
-
-```
 
 
 
@@ -1146,15 +1137,6 @@ class: inverse
 ## FLUXO CIRCULAR DA RENDA (AMPLIADO)
 
 
-```{r, echo = F, warning = F, message = F, error = F, out.width= '100%', fig.align = 'center'}
-
-
-
-knitr::include_graphics('fcr_ampliado.png', dpi = 300)
-
-
-
-```
   
   
   
