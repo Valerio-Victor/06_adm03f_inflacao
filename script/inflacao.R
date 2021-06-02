@@ -420,12 +420,127 @@ pesos_atuais <- grupo_ts20_21 %>%
 
 
 
+#---------------------------------------------------------------------------------------------------
 
 
 
+var_ipca_cheio <- BETS::BETSget(code = 433,
+
+                                data.frame = TRUE,
+
+                                from = '1990-01-01')
 
 
 
+var_ipca_aliment <- BETS::BETSget(code = 1635,
+
+                                  data.frame = TRUE,
+
+                                  from = '1990-01-01')
+
+
+
+var_ipca_habit <- BETS::BETSget(code = 1636,
+
+                                data.frame = TRUE,
+
+                                from = '1990-01-01')
+
+
+
+var_ipca_art_res <- BETS::BETSget(code = 1637,
+
+                                  data.frame = TRUE,
+
+                                  from = '1990-01-01')
+
+
+
+var_ipca_vest <- BETS::BETSget(code = 1638,
+
+                               data.frame = TRUE,
+
+                               from = '1990-01-01')
+
+
+
+var_ipca_transp <- BETS::BETSget(code = 1639,
+
+                                 data.frame = TRUE,
+
+                                 from = '1990-01-01')
+
+
+
+var_ipca_comunic <- BETS::BETSget(code = 1640,
+
+                                  data.frame = TRUE,
+
+                                  from = '1990-01-01')
+
+
+
+var_ipca_saud_cuid <- BETS::BETSget(code = 1641,
+
+                                    data.frame = TRUE,
+
+                                    from = '1990-01-01')
+
+
+
+var_ipca_desp_pessoais <- BETS::BETSget(code = 1642,
+
+                                        data.frame = TRUE,
+
+                                        from = '1990-01-01')
+
+
+
+var_ipca_educ <- BETS::BETSget(code = 1643,
+
+                               data.frame = TRUE,
+
+                               from = '1990-01-01')
+
+
+
+var_livres <- BETS::BETSget(code = 11428,
+
+                            data.frame = TRUE,
+
+                            from = '1990-01-01')
+
+
+
+var_monitor <- BETS::BETSget(code = 4449,
+
+                             data.frame = TRUE,
+
+                             from = '1990-01-01')
+
+
+
+var_comerc <- BETS::BETSget(code = 4447,
+
+                            data.frame = TRUE,
+
+                            from = '1990-01-01')
+
+
+
+var_n_comerc <- BETS::BETSget(code = 4448,
+
+                              data.frame = TRUE,
+
+                              from = '1990-01-01')
+
+
+
+difusao <- BETS::BETSget(code = 21379,
+
+                         data.frame = TRUE,
+
+                         from = '1990-01-01')
 
 
 
