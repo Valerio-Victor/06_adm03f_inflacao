@@ -894,7 +894,7 @@ var_ipca_aliment <- BETS::BETSget(code = 1635,
 
                                   data.frame = TRUE,
 
-                                  from = '1995-01-01') %>% 
+                                  from = '2005-01-01') %>% 
   
   dplyr::mutate(Grupo = 'Alimentos e Bebidas') %>% 
   
@@ -909,7 +909,7 @@ var_ipca_habit <- BETS::BETSget(code = 1636,
 
                                 data.frame = TRUE,
 
-                                from = '1995-01-01') %>% 
+                                from = '2005-01-01') %>% 
   
   dplyr::mutate(Grupo = 'Habitação') %>% 
   
@@ -924,7 +924,7 @@ var_ipca_art_res <- BETS::BETSget(code = 1637,
 
                                   data.frame = TRUE,
 
-                                  from = '1995-01-01') %>% 
+                                  from = '2005-01-01') %>% 
   
   dplyr::mutate(Grupo = 'Artigos de Residência') %>% 
   
@@ -939,7 +939,7 @@ var_ipca_vest <- BETS::BETSget(code = 1638,
 
                                data.frame = TRUE,
 
-                               from = '1995-01-01') %>% 
+                               from = '2005-01-01') %>% 
   
   dplyr::mutate(Grupo = 'Vestuário') %>% 
   
@@ -954,7 +954,7 @@ var_ipca_transp <- BETS::BETSget(code = 1639,
 
                                  data.frame = TRUE,
 
-                                 from = '1995-01-01') %>% 
+                                 from = '2005-01-01') %>% 
   
   dplyr::mutate(Grupo = 'Transportes') %>% 
   
@@ -969,7 +969,7 @@ var_ipca_comunic <- BETS::BETSget(code = 1640,
 
                                   data.frame = TRUE,
 
-                                  from = '1995-01-01') %>% 
+                                  from = '2005-01-01') %>% 
   
   dplyr::mutate(Grupo = 'Comunicação') %>% 
   
@@ -984,7 +984,7 @@ var_ipca_saud_cuid <- BETS::BETSget(code = 1641,
 
                                     data.frame = TRUE,
 
-                                    from = '1995-01-01') %>% 
+                                    from = '2005-01-01') %>% 
   
   dplyr::mutate(Grupo = 'Saúde e Cuidados Pessoais') %>% 
   
@@ -999,7 +999,7 @@ var_ipca_desp_pessoais <- BETS::BETSget(code = 1642,
 
                                         data.frame = TRUE,
 
-                                        from = '1995-01-01') %>% 
+                                        from = '2005-01-01') %>% 
   
   dplyr::mutate(Grupo = 'Despesas Pessoais') %>% 
   
@@ -1014,13 +1014,16 @@ var_ipca_educ <- BETS::BETSget(code = 1643,
 
                                data.frame = TRUE,
 
-                               from = '1995-01-01') %>% 
+                               from = '2005-01-01') %>% 
   
   dplyr::mutate(Grupo = 'Educação') %>% 
   
   dplyr::rename('Data' = date,
                 
                 'Valor' = value)
+
+
+
 
 consolidado <- rbind(var_ipca_aliment,
                      
@@ -1042,7 +1045,41 @@ consolidado <- rbind(var_ipca_aliment,
 
 
 
+consolidado <- consolidado %>% 
+  
+  ggplot2::ggplot() +
 
+  ggplot2::geom_line(mapping = ggplot2::aes(x = Data, y = Valor, frame = Grupo),
+
+                     colour = '#23395b',
+
+                     size = .5) +
+
+  ggplot2::geom_point(mapping = ggplot2::aes(x = Data, y = Valor, frame = Grupo),
+
+                      colour = '#23395b',
+                      
+                      size = .75) +
+  
+  ggplot2::scale_y_continuous(labels = scales::number_format(suffix = '%')) +
+  
+  ggplot2::labs(title = 'IPCA',
+                
+                x = 'Meses',
+                
+                y = 'Variação Mensal',
+                
+                caption = 'Dados: IBGE.') +
+  
+  xaringanthemer::theme_xaringan(text_font_size = 15,
+                                 
+                                 title_font_size = 20)
+
+
+consolidado <- plotly::ggplotly(consolidado)
+
+
+widgetframe::frameWidget(consolidado, width = '100%', height = '100%')
 
 
 ```
