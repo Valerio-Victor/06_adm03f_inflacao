@@ -67,12 +67,706 @@ xaringanExtra::use_search(show_icon = TRUE)
 
 
 
+
+
+
+
+
 ---
 class: inverse, center, middle 
 name: introducao
 
 
 ## INTRODUÇÃO
+
+
+
+
+
+
+
+
+---
+
+
+## O BRASIL EM PERSPECTIVA
+
+
+```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', dpi = 300}
+
+
+
+
+library(magrittr, include.only = '%>%')
+
+
+
+
+ipca_ts <- sidrar::get_sidra(api = '/t/1737/n1/all/v/63,69,2266/p/all/d/v63%202,v69%202,v2266%2013') %>%
+
+  janitor::clean_names()
+
+
+
+
+acum_ano <- ipca_ts %>%
+
+  dplyr::filter(variavel == 'IPCA - Variação acumulada no ano') %>%
+
+  dplyr::transmute(data = zoo::as.yearmon(mes_codigo, format = '%Y %m'),
+
+                   valor = round(valor, 6)) %>%
+
+  dplyr::mutate(mes = lubridate::month(data)) %>%
+
+  dplyr::filter(mes == 12) %>%
+
+  dplyr::filter(data >= zoo::as.yearmon(1990, 01)) %>%
+  
+  dplyr::filter(data <= zoo::as.yearmon(2000, 01)) %>%
+
+  dplyr::mutate(data = lubridate::year(data)) %>%
+
+  dplyr::select(data, valor) %>% 
+  
+  dplyr::rename('Data' = data,
+                
+                'Valor' = valor) %>% 
+
+  ggplot2::ggplot() +
+
+  ggplot2::geom_line(mapping = ggplot2::aes(x = Data, y = Valor),
+
+                     colour = '#23395b',
+
+                     size = .5) +
+
+  ggplot2::geom_point(mapping = ggplot2::aes(x = Data, y = Valor),
+
+                      colour = '#23395b',
+                      
+                      size = .75) +
+  
+  ggplot2::scale_y_continuous(labels = scales::number_format(suffix = '%')) +
+  
+  ggplot2::scale_x_continuous(breaks = seq(1990, 2000, 2)) +
+  
+  ggplot2::labs(title = 'IPCA',
+                
+                x = 'Meses',
+                
+                y = 'Acumulado no Ano',
+                
+                caption = 'Dados: IBGE.') +
+  
+  xaringanthemer::theme_xaringan(text_font_size = 15,
+                                 
+                                 title_font_size = 20)
+
+
+acum_ano  <- plotly::ggplotly(acum_ano)
+
+
+widgetframe::frameWidget(acum_ano, width = '100%', height = '100%')
+
+
+```
+
+
+
+
+
+
+
+
+---
+
+
+## O BRASIL EM PERSPECTIVA
+
+
+```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', dpi = 300}
+
+library(magrittr, include.only = '%>%')
+
+difusao <- BETS::BETSget(code = 21379,
+
+                         data.frame = TRUE,
+
+                         from = '1990-01-01') %>% 
+  
+  dplyr::rename('Data' = date,
+                
+                'Valor' = value) %>% 
+
+  ggplot2::ggplot() +
+
+  ggplot2::geom_line(mapping = ggplot2::aes(x = Data, y = Valor),
+
+                     colour = '#23395b',
+
+                     size = .5) +
+
+  ggplot2::geom_point(mapping = ggplot2::aes(x = Data, y = Valor),
+
+                      colour = '#23395b',
+                      
+                      size = .75) +
+  
+  ggplot2::labs(title = 'Difusão de Preços',
+                
+                x = 'Meses',
+                
+                y = 'Porcentagem',
+                
+                caption = 'Dados: BCB.') +
+  
+  ggplot2::scale_y_continuous(labels = scales::number_format(suffix = '%')) +
+  
+  xaringanthemer::theme_xaringan(text_font_size = 15,
+                                 
+                                 title_font_size = 20)
+
+
+difusao  <- plotly::ggplotly(difusao)
+
+
+widgetframe::frameWidget(difusao, width = '100%', height = '100%')
+
+
+```
+
+
+
+
+
+
+
+
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+**REVISÃO DE CONCEITOS**
+  
+- Nós já sabemos como calcular um número índice a partir de qualquer série de dados, como no exemplo
+já apresentado ainda na aula de Fluxo Circular da Renda:
+  
+
+```{r , results = 'asis', echo = F, warning = F, message = F, error = F, fig.align ='center'}
+
+
+library(magrittr)
+
+
+library(kableExtra)
+
+
+ex_numero_indice <- data.frame(
+  
+  DATAS = c(2015, 2016, 2017, 2018, 2019, 2020),
+  
+  VALORES = c('R$ 12.589', 
+              'R$ 13.785', 
+              'R$ 13.947', 
+              'R$ 14.125', 
+              'R$ 15.352', 
+              'R$ 16.756'),
+  
+  TRANSFORMAÇÕES = c('12.589 = 100', 
+                    'R$ 13.785 x 100/ R$ 12.589', 
+                    'R$ 13.947 x 100/ R$ 12.589', 
+                    'R$ 14.125 x 100/ R$ 12.589', 
+                    'R$ 15.352 x 100/ R$ 12.589', 
+                    'R$ 16.756 x 100/ R$ 12.589'),
+  
+  ÍNDICES = c('100', '109,50', '110,79', '112,20', '121,95', '133,10'))
+
+
+knitr::kable(ex_numero_indice, 
+             
+             escape = FALSE,
+    
+             format = 'html',
+             
+             align = c('c', 'c', 'c', 'c')) %>%
+  
+  kable_styling(bootstrap_options = 'striped', font_size = 24)
+  
+
+
+
+
+```
+
+
+- Mas e se nós quiséssemos calcular um índice único representativo de diferentes variáveis?
+
+
+
+
+
+
+
+
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+**CONCEITOS**
+  
+  
+- Problema prático com duas variáveis. Qual procedimento deveria ser aplicado para criar um índice 
+único representativo das duas colunas de valores (que, por sua vez, representam duas variáveis):
+
+
+```{r , results = 'asis', echo = F, warning = F, message = F, error = F, fig.align ='center'}
+
+
+library(magrittr)
+
+
+library(kableExtra)
+
+
+ex_numero_indice <- data.frame(
+  
+  DATAS = c(2015, 2016, 2017, 2018, 2019, 2020),
+  
+  A = c('R$ 100', 
+        'R$ 110', 
+        'R$ 121', 
+        'R$ 133,1', 
+        'R$ 146,41', 
+        'R$ 161,05'),
+  
+  B = c('R$ 5', 
+        'R$ 10', 
+        'R$ 20', 
+        'R$ 40', 
+        'R$ 80', 
+        'R$ 160')
+  
+  )
+
+
+knitr::kable(ex_numero_indice, 
+             
+             escape = FALSE,
+    
+             format = 'html',
+             
+             align = c('c', 'c', 'c')) %>%
+  
+  kable_styling(bootstrap_options = 'striped', font_size = 24)
+  
+
+
+
+
+```
+
+
+- Uma proposta inicial seria somar as duas variáveis (A e B) para, então, transformar a série criada
+a partir da soma em um número índice.
+
+
+
+
+
+
+
+
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+**CONCEITOS**
+  
+  
+- Abaixo são apresentados cada um dos passos a serem tomados:
+
+
+```{r , results = 'asis', echo = F, warning = F, message = F, error = F, fig.align ='center'}
+
+
+library(magrittr)
+
+
+library(kableExtra)
+
+
+ex_numero_indice <- data.frame(
+  
+  DATAS = c(2015, 2016, 2017, 2018, 2019, 2020),
+  
+  A = c('R$ 100', 
+        'R$ 110', 
+        'R$ 121', 
+        'R$ 133,1', 
+        'R$ 146,41', 
+        'R$ 161,05'),
+  
+  B = c('R$ 5', 
+        'R$ 10', 
+        'R$ 20', 
+        'R$ 40', 
+        'R$ 80', 
+        'R$ 160'),
+  
+  SOMA = c('R$ 105',
+           'R$ 120',
+           'R$ 141',
+           'R$ 173.11',
+           'R$ 226.14',
+           'R$ 321.10'), 
+  
+  TRANSFORMAÇÃO = c('R$ 105 = 100', 
+                    'R$ 120 x 100/ R$ 105', 
+                    'R$ 141 x 100/ R$ 105', 
+                    'R$ 173.11 x 100/ R$ 105', 
+                    'R$ 226.14 x 100/ R$ 105', 
+                    'R$ 321.10 x 100/ R$ 105'),
+  
+  ÍNDICE = c(100.00,
+             114.29,
+             134.29,
+             164.86,
+             215.63,
+             305.76)
+  
+  )
+
+
+knitr::kable(ex_numero_indice, 
+             
+             escape = FALSE,
+    
+             format = 'html',
+             
+             align = c('c', 'c', 'c', 'c')) %>%
+  
+  kable_styling(bootstrap_options = 'striped', font_size = 24)
+  
+
+
+
+
+```
+
+
+- O número índice criado não é representativo da série (pois a variável A, de maior valor, possui
+maior "influência" no cálculo da variação percentual).
+
+
+
+
+
+
+
+
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+**CONCEITOS**
+  
+  
+- Uma boa maneira seria ponderar a importância de cada uma das variáveis a partir de algum critério,
+por exemplo, como são preços de produtos, pode-se adotar como termo de ponderação a quantidade 
+consumida:
+
+
+```{r , results = 'asis', echo = F, warning = F, message = F, error = F, fig.align ='center'}
+
+
+library(magrittr)
+
+
+library(kableExtra)
+
+
+ex_numero_indice <- data.frame(
+  
+  DATAS = c(2015, 2016, 2017, 2018, 2019, 2020),
+  
+  A = c('R$ 100', 
+        'R$ 110', 
+        'R$ 121', 
+        'R$ 133,1', 
+        'R$ 146,41', 
+        'R$ 161,05'),
+  
+  QA = c('2',
+         '2',
+         '2,2',
+         '2,5',
+         '2,1',
+         '2,8'), 
+  
+  B = c('R$ 5', 
+        'R$ 10', 
+        'R$ 20', 
+        'R$ 40', 
+        'R$ 80', 
+        'R$ 160'),
+  
+  QB = c('22',
+         '22,3',
+         '23,4',
+         '21',
+         '25',
+         '26'), 
+  
+  SOMA = c('R$ 100 x 2 +  R$ 5 x 22 = 310', 
+           'R$ 110 x 2 +  R$ 10 x 22,3 = 443', 
+           'R$ 121 x 2,2 +  R$ 20 x 23,4 = 734,2', 
+           'R$ 133,1 x 2,5 +  R$ 40 x 21 = 1172,75', 
+           'R$ 146,41 x 2,1 +  R$ 80 x 25 = 2307,46', 
+           'R$ 161,05 x 2,8 +  R$ 160 x 26 = 4610,94'),
+  
+  ÍNDICE = c(100,
+             142.9,
+             236.8,
+             378.3,
+             744.3,
+             1487.4)
+  
+)
+
+
+knitr::kable(ex_numero_indice, 
+             
+             escape = FALSE,
+    
+             format = 'html',
+             
+             align = c('c', 'c', 'c', 'c', 'c', 'l', 'c')) %>%
+  
+  kable_styling(bootstrap_options = 'striped', font_size = 24)
+  
+
+
+
+
+```
+
+- Agora, como a variável de menor preço possui maior importância na destinação dos recursos familiares
+seu impacto é melhor representado pelo índice criado. De fato, é assim que é construído um **índice de
+preços**.
+
+
+
+
+
+
+
+
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+**CONCEITOS**
+  
+</br>
+  
+- O Brasil possui diversos **índices de inflação** mensurados periodicamente, cada um com a sua
+finalidade, são exemplos:
+
+  - **Índice Nacional de Preços ao Consumidor (INPC)**: medir as variações de preços da cesta de 
+  consumo das populações assalariadas e com baixo rendimento;
+
+  - **Índice Nacional de Preços ao Consumidor Amplo (IPCA)**: medir as variações de preços referentes 
+  ao consumo pessoal;
+  
+  
+- Neste curso vamos nos concentrar  no **IPCA**, entretanto, exceto especifidades de cálculos as 
+formas de análise são similares.
+
+  - O **IPCA** é um dos principais **índices de inflação**, visto que, corresponde a métrica utilizada pelo Banco Central do Brasil como **controle inflacionário** (metas de inflação);
+
+
+
+
+
+
+
+
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+**CONCEITOS**
+  
+</br>
+
+- Sobre o **Índice Nacional de Preços ao Consumidor Amplo (IPCA)**:
+
+  - Efetua a produção contínua e sistemática de índices de preços ao consumidor, tendo como **unidade 
+  de coleta estabelecimentos comerciais e de prestação de serviços, concessionária de serviços públicos
+  e domicílios (para levantamento de aluguel e condomínio)**; 
+  
+  - O período de coleta do IPCA estende-se, em geral, do dia **01 a 30 do mês de referência**;
+  
+  - A população-objetivo do IPCA abrange as famílias com rendimentos mensais compreendidos entre **1 
+  (um) e 40 (quarenta) salários-mínimos**, qualquer que seja a fonte de rendimentos, e residentes nas 
+  áreas urbanas das regiões.
+  
+  
+  
+  
+  
+  
+  
+  
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+
+
+**CONCEITOS**
+  
+
+- Sobre o **Índice Nacional de Preços ao Consumidor Amplo (IPCA)**:
+
+  - A periodicidade do **IPCA** é **mensal**;
+  
+  - Abrangendo as regiões metropolitanas de **Belém, Fortaleza, Recife, Salvador, Belo Horizonte, Rio de     Janeiro, São Paulo, Curitiba, Vitória e Porto Alegre, Brasília e municípios de Goiânia e Campo Grande**.
+  
+  - É constituído de forma hierarquizada, sendo que, seu cômputo é divido grupos (9), subgrupos (19), 
+  itens (51) e subitens (377). 
+
+  - O peso de cada um desses grupos no índice cheio é definido mensalmente, de acordo com os gastos das  
+  famílias em diferentes bens e serviços. Estes gastos, por sua vez, são captados pela **Pesquisa de 
+  Orçamento Familiar (POF)**.
+
+
+
+
+
+  
+---
+<div style="text-align: justify">
+
+
+## INTRODUÇÃO
+  
+
+**CONCEITOS**
+
+
+- Desde agosto de 1999 são 9 grupos:
+
+  1) **Alimentos e Bebidas**;
+  
+  2) **Habitação**;
+  
+  3) **Artigos de Residência**;
+  
+  4) **Vestuário**;
+  
+  5) **Transportes**;
+  
+  6) **Comunicação**;
+  
+  7) **Saúde e Cuidados Pessoais**;
+  
+  8) **Despesas Pessoais**;
+  
+  9) **Educação**.
+
+
+
+
+
+
+
+
+---
+
+
+## O BRASIL EM PERSPECTIVA
+
+
+```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', dpi = 300}
+
+
+library(magrittr, include.only = '%>%')
+
+
+ipca_ts <- sidrar::get_sidra(api = '/t/1737/n1/all/v/63,69,2266/p/all/d/v63%202,v69%202,v2266%2013') %>%
+
+  janitor::clean_names()
+
+
+ipca <- ipca_ts %>%
+
+  dplyr::filter(variavel == 'IPCA - Número-índice (base: dezembro de 1993 = 100)') %>%
+
+  dplyr::transmute(data = zoo::as.yearmon(mes_codigo, format = '%Y %m'),
+
+                   valor = round(valor, 6)) %>%
+
+  dplyr::filter(data >= zoo::as.yearmon(1995, 01)) %>% 
+  
+  dplyr::rename('Data' = data,
+                
+                'Valor' = valor) %>% 
+
+  ggplot2::ggplot() +
+
+  ggplot2::geom_line(mapping = ggplot2::aes(x = Data, y = Valor),
+
+                     colour = '#23395b',
+
+                     size = .5) +
+
+  ggplot2::geom_point(mapping = ggplot2::aes(x = Data, y = Valor),
+
+                      colour = '#23395b',
+                      
+                      size = .75) +
+  
+  ggplot2::labs(title = 'IPCA',
+                
+                x = 'Meses',
+                
+                y = 'Índice (Base: dez de 1993 = 100)',
+                
+                caption = 'Dados: IBGE.') +
+  
+  xaringanthemer::theme_xaringan(text_font_size = 15,
+                                 
+                                 title_font_size = 20)
+
+
+ipca  <- plotly::ggplotly(ipca )
+
+
+widgetframe::frameWidget(ipca , width = '100%', height = '100%')
+
+
+```
 
 
 ---
@@ -83,12 +777,329 @@ name: conceitoipca
 ## CONCEITO DE INFLAÇÃO
 
 
+
+
+
+
+
+
+---
+<div style="text-align: justify">
+
+
+## CONCEITO DE INFLAÇÃO
+
+
+</br>
+
+
+- **INFLAÇÃO**:
+
+  - A Inflação corresponde a uma situação em que há um aumento generalizado e persistente no nível de 
+  preços (pode ser captada pelos índices de preços);
+
+
+</br>
+
+
+- **HIPERINFLAÇÃO**:
+
+  - Costuma-se definir como hiperinflação o aumento generalizado e persistente no nível de preços que 
+  segue uma trajetória elevada e acelerada (não há um nível estrito para se definir a hiperinflação).
+
+
+
+
+
+
+
+
+---
+
+
+## O BRASIL EM PERSPECTIVA
+
+
+```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', dpi = 300}
+
+
+
+library(magrittr, include.only = '%>%')
+
+
+var_ipca_cheio <- BETS::BETSget(code = 433,
+
+                                data.frame = TRUE,
+
+                                from = '1995-01-01') %>% 
+  
+  dplyr::rename('Data' = date,
+                
+                'Valor' = value) %>% 
+
+  ggplot2::ggplot() +
+
+  ggplot2::geom_line(mapping = ggplot2::aes(x = Data, y = Valor),
+
+                     colour = '#23395b',
+
+                     size = .5) +
+
+  ggplot2::geom_point(mapping = ggplot2::aes(x = Data, y = Valor),
+
+                      colour = '#23395b',
+                      
+                      size = .75) +
+  
+  ggplot2::scale_y_continuous(labels = scales::number_format(suffix = '%')) +
+  
+  ggplot2::labs(title = 'IPCA',
+                
+                x = 'Meses',
+                
+                y = 'Variação Mensal',
+                
+                caption = 'Dados: IBGE.') +
+  
+  xaringanthemer::theme_xaringan(text_font_size = 15,
+                                 
+                                 title_font_size = 20)
+
+
+var_ipca_cheio  <- plotly::ggplotly(var_ipca_cheio)
+
+
+widgetframe::frameWidget(var_ipca_cheio, width = '100%', height = '100%')
+
+
+```
+
+
+
+
+
+
+
+
+---
+
+
+## O BRASIL EM PERSPECTIVA
+
+
+```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', dpi = 300}
+
+
+var_ipca_aliment <- BETS::BETSget(code = 1635,
+
+                                  data.frame = TRUE,
+
+                                  from = '1995-01-01') %>% 
+  
+  dplyr::mutate(Grupo = 'Alimentos e Bebidas') %>% 
+  
+  dplyr::rename('Data' = date,
+                
+                'Valor' = value)
+
+
+
+
+var_ipca_habit <- BETS::BETSget(code = 1636,
+
+                                data.frame = TRUE,
+
+                                from = '1995-01-01') %>% 
+  
+  dplyr::mutate(Grupo = 'Habitação') %>% 
+  
+  dplyr::rename('Data' = date,
+                
+                'Valor' = value)
+
+
+
+
+var_ipca_art_res <- BETS::BETSget(code = 1637,
+
+                                  data.frame = TRUE,
+
+                                  from = '1995-01-01') %>% 
+  
+  dplyr::mutate(Grupo = 'Artigos de Residência') %>% 
+  
+  dplyr::rename('Data' = date,
+                
+                'Valor' = value)
+
+
+
+
+var_ipca_vest <- BETS::BETSget(code = 1638,
+
+                               data.frame = TRUE,
+
+                               from = '1995-01-01') %>% 
+  
+  dplyr::mutate(Grupo = 'Vestuário') %>% 
+  
+  dplyr::rename('Data' = date,
+                
+                'Valor' = value)
+
+
+
+
+var_ipca_transp <- BETS::BETSget(code = 1639,
+
+                                 data.frame = TRUE,
+
+                                 from = '1995-01-01') %>% 
+  
+  dplyr::mutate(Grupo = 'Transportes') %>% 
+  
+  dplyr::rename('Data' = date,
+                
+                'Valor' = value)
+
+
+
+
+var_ipca_comunic <- BETS::BETSget(code = 1640,
+
+                                  data.frame = TRUE,
+
+                                  from = '1995-01-01') %>% 
+  
+  dplyr::mutate(Grupo = 'Comunicação') %>% 
+  
+  dplyr::rename('Data' = date,
+                
+                'Valor' = value)
+
+
+
+
+var_ipca_saud_cuid <- BETS::BETSget(code = 1641,
+
+                                    data.frame = TRUE,
+
+                                    from = '1995-01-01') %>% 
+  
+  dplyr::mutate(Grupo = 'Saúde e Cuidados Pessoais') %>% 
+  
+  dplyr::rename('Data' = date,
+                
+                'Valor' = value)
+
+
+
+
+var_ipca_desp_pessoais <- BETS::BETSget(code = 1642,
+
+                                        data.frame = TRUE,
+
+                                        from = '1995-01-01') %>% 
+  
+  dplyr::mutate(Grupo = 'Despesas Pessoais') %>% 
+  
+  dplyr::rename('Data' = date,
+                
+                'Valor' = value)
+
+
+
+
+var_ipca_educ <- BETS::BETSget(code = 1643,
+
+                               data.frame = TRUE,
+
+                               from = '1995-01-01') %>% 
+  
+  dplyr::mutate(Grupo = 'Educação') %>% 
+  
+  dplyr::rename('Data' = date,
+                
+                'Valor' = value)
+
+consolidado <- rbind(var_ipca_aliment,
+                     
+                     var_ipca_habit,
+                     
+                     var_ipca_art_res,
+                     
+                     var_ipca_vest,
+                     
+                     var_ipca_transp,
+                     
+                     var_ipca_comunic,
+                     
+                     var_ipca_saud_cuid,
+                     
+                     var_ipca_desp_pessoais,
+                     
+                     var_ipca_educ)
+
+
+
+
+
+
+```
+
+
+
+---
+<div style="text-align: justify">
+
+
+## CONCEITO ASSOCIADOS À INFLAÇÃO
+
+
+</br>
+
+
+- **DESINFLAÇÃO**:
+
+  - A desinflação corresponde a uma diminuição nas taxas de aumentos dos níveis de preço (os preços 
+  começam a aumentar de maneira menos acelerada);
+
+
+</br>
+
+
+- **DEFLAÇÃO**:
+
+  - A deflação corresponde a uma situação em que há uma diminuição generalizada e persistente no 
+  nível de preços (repare que a definição de deflação depende da persistência).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ---
 class: inverse, center, middle 
 name: causas_inflacao
 
 
 ## CAUSAS DA INFLAÇÃO
+
 
 
 ---
@@ -191,29 +1202,31 @@ name: brasil
 
 
 
----
-<div style="text-align: justify">
 
 
-## INTRODUÇÃO
 
 
-**CONCEITOS**
 
 
-</br>
-  
-  
-- Para entender o funcionamento básico da economia de um país é útil iniciar a apresentação por meio 
-da definição de 3 conceitos iniciais da macroeconomia, são eles:
-  
-</br>
 
-  - **PRODUTO AGREGADO** (OU OFERTA AGREGADA);
-  
-  - **RENDA AGREGADA**;
-  
-  - **DEMANDA AGREGADA** (OU DESPESA AGREGADA/CONSUMO AGREGADO).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
 ---

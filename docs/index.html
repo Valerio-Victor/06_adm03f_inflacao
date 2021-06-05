@@ -13,6 +13,9 @@
     <link href="index_files/xaringanExtra-search-0.0.1/search.css" rel="stylesheet" />
     <script src="index_files/xaringanExtra-search-0.0.1/search.js"></script>
     <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":true,"autoSearch":true}) })</script>
+    <script src="index_files/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+    <script src="index_files/pymjs-1.3.2/pym.v1.js"></script>
+    <script src="index_files/widgetframe-binding-0.3.1/widgetframe.js"></script>
     <script src="index_files/kePrint-0.0.1/kePrint.js"></script>
     <link href="index_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
@@ -24,7 +27,7 @@ class: center, middle, inverse, title-slide
 # TAXA DE INFLAÇÃO </br> (AULA 06)
 ## ADM03F - Macroeconomia
 ### Autor: Victor Valerio
-### Última atualização: 02-06-2021
+### Última atualização: 04-06-2021
 
 ---
 
@@ -65,12 +68,515 @@ class: center, middle, inverse, title-slide
 
 
 
+
+
+
+
+
 ---
 class: inverse, center, middle 
 name: introducao
 
 
 ## INTRODUÇÃO
+
+
+
+
+
+
+
+
+---
+
+
+## O BRASIL EM PERSPECTIVA
+
+
+<div id="htmlwidget-a629da6dcb292d9f6ea1" style="width:100%;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a629da6dcb292d9f6ea1">{"x":{"url":"index_files/figure-html//widgets/widget_unnamed-chunk-2.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+
+
+
+
+
+
+
+
+---
+
+
+## O BRASIL EM PERSPECTIVA
+
+
+<div id="htmlwidget-7212031974d22db9e6c8" style="width:100%;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7212031974d22db9e6c8">{"x":{"url":"index_files/figure-html//widgets/widget_unnamed-chunk-3.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+
+
+
+
+
+
+
+
+---
+&lt;div style="text-align: justify"&gt;
+
+
+## INTRODUÇÃO
+
+
+**REVISÃO DE CONCEITOS**
+  
+- Nós já sabemos como calcular um número índice a partir de qualquer série de dados, como no exemplo
+já apresentado ainda na aula de Fluxo Circular da Renda:
+  
+
+&lt;table class="table table-striped" style="font-size: 24px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; DATAS &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; VALORES &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; TRANSFORMAÇÕES &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; ÍNDICES &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2015 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 12.589 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 12.589 = 100 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 100 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2016 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 13.785 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 13.785 x 100/ R$ 12.589 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 109,50 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2017 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 13.947 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 13.947 x 100/ R$ 12.589 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 110,79 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2018 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 14.125 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 14.125 x 100/ R$ 12.589 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 112,20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2019 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 15.352 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 15.352 x 100/ R$ 12.589 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 121,95 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2020 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 16.756 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 16.756 x 100/ R$ 12.589 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 133,10 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+- Mas e se nós quiséssemos calcular um índice único representativo de diferentes variáveis?
+
+
+
+
+
+
+
+
+---
+&lt;div style="text-align: justify"&gt;
+
+
+## INTRODUÇÃO
+
+
+**CONCEITOS**
+  
+  
+- Problema prático com duas variáveis. Qual procedimento deveria ser aplicado para criar um índice 
+único representativo das duas colunas de valores (que, por sua vez, representam duas variáveis):
+
+
+&lt;table class="table table-striped" style="font-size: 24px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; DATAS &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; A &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; B &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2015 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 100 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2016 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 110 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 10 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2017 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 121 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2018 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 133,1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 40 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2019 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 146,41 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 80 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2020 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 161,05 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 160 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+- Uma proposta inicial seria somar as duas variáveis (A e B) para, então, transformar a série criada
+a partir da soma em um número índice.
+
+
+
+
+
+
+
+
+---
+&lt;div style="text-align: justify"&gt;
+
+
+## INTRODUÇÃO
+
+
+**CONCEITOS**
+  
+  
+- Abaixo são apresentados cada um dos passos a serem tomados:
+
+
+&lt;table class="table table-striped" style="font-size: 24px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; DATAS &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; A &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; B &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; SOMA &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; TRANSFORMAÇÃO &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; ÍNDICE &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2015 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 100 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 105 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 105 = 100 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 100.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2016 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 110 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 120 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 120 x 100/ R$ 105 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 114.29 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2017 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 121 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 20 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 141 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 141 x 100/ R$ 105 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 134.29 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2018 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 133,1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 40 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 173.11 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 173.11 x 100/ R$ 105 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 164.86 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2019 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 146,41 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 80 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 226.14 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 226.14 x 100/ R$ 105 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 215.63 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2020 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 161,05 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 160 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 321.10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 321.10 x 100/ R$ 105 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 305.76 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+- O número índice criado não é representativo da série (pois a variável A, de maior valor, possui
+maior "influência" no cálculo da variação percentual).
+
+
+
+
+
+
+
+
+---
+&lt;div style="text-align: justify"&gt;
+
+
+## INTRODUÇÃO
+
+
+**CONCEITOS**
+  
+  
+- Uma boa maneira seria ponderar a importância de cada uma das variáveis a partir de algum critério,
+por exemplo, como são preços de produtos, pode-se adotar como termo de ponderação a quantidade 
+consumida:
+
+
+&lt;table class="table table-striped" style="font-size: 24px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; DATAS &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; A &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; QA &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; B &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; QB &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; SOMA &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; ÍNDICE &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2015 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 100 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 22 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; R$ 100 x 2 +  R$ 5 x 22 = 310 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 100.0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2016 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 110 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 22,3 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; R$ 110 x 2 +  R$ 10 x 22,3 = 443 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 142.9 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2017 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 121 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2,2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 20 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 23,4 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; R$ 121 x 2,2 +  R$ 20 x 23,4 = 734,2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 236.8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2018 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 133,1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2,5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 40 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 21 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; R$ 133,1 x 2,5 +  R$ 40 x 21 = 1172,75 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 378.3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2019 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 146,41 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2,1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 80 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 25 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; R$ 146,41 x 2,1 +  R$ 80 x 25 = 2307,46 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 744.3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2020 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 161,05 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2,8 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; R$ 160 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 26 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; R$ 161,05 x 2,8 +  R$ 160 x 26 = 4610,94 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1487.4 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+- Agora, como a variável de menor preço possui maior importância na destinação dos recursos familiares
+seu impacto é melhor representado pelo índice criado. De fato, é assim que é construído um **índice de
+preços**.
+
+
+
+
+
+
+
+
+---
+&lt;div style="text-align: justify"&gt;
+
+
+## INTRODUÇÃO
+
+
+**CONCEITOS**
+  
+&lt;/br&gt;
+  
+- O Brasil possui diversos **índices de inflação** mensurados periodicamente, cada um com a sua
+finalidade, são exemplos:
+
+  - **Índice Nacional de Preços ao Consumidor (INPC)**: medir as variações de preços da cesta de 
+  consumo das populações assalariadas e com baixo rendimento;
+
+  - **Índice Nacional de Preços ao Consumidor Amplo (IPCA)**: medir as variações de preços referentes 
+  ao consumo pessoal;
+  
+  
+- Neste curso vamos nos concentrar  no **IPCA**, entretanto, exceto especifidades de cálculos as 
+formas de análise são similares.
+
+  - O **IPCA** é um dos principais **índices de inflação**, visto que, corresponde a métrica utilizada pelo Banco Central do Brasil como **controle inflacionário** (metas de inflação);
+
+
+
+
+
+
+
+
+---
+&lt;div style="text-align: justify"&gt;
+
+
+## INTRODUÇÃO
+
+
+**CONCEITOS**
+  
+&lt;/br&gt;
+
+- Sobre o **Índice Nacional de Preços ao Consumidor Amplo (IPCA)**:
+
+  - Efetua a produção contínua e sistemática de índices de preços ao consumidor, tendo como **unidade 
+  de coleta estabelecimentos comerciais e de prestação de serviços, concessionária de serviços públicos
+  e domicílios (para levantamento de aluguel e condomínio)**; 
+  
+  - O período de coleta do IPCA estende-se, em geral, do dia **01 a 30 do mês de referência**;
+  
+  - A população-objetivo do IPCA abrange as famílias com rendimentos mensais compreendidos entre **1 
+  (um) e 40 (quarenta) salários-mínimos**, qualquer que seja a fonte de rendimentos, e residentes nas 
+  áreas urbanas das regiões.
+  
+  
+  
+  
+  
+  
+  
+  
+---
+&lt;div style="text-align: justify"&gt;
+
+
+## INTRODUÇÃO
+
+
+**CONCEITOS**
+  
+
+- Sobre o **Índice Nacional de Preços ao Consumidor Amplo (IPCA)**:
+
+  - A periodicidade do **IPCA** é **mensal**;
+  
+  - Abrangendo as regiões metropolitanas de **Belém, Fortaleza, Recife, Salvador, Belo Horizonte, Rio de     Janeiro, São Paulo, Curitiba, Vitória e Porto Alegre, Brasília e municípios de Goiânia e Campo Grande**.
+  
+  - É constituído de forma hierarquizada, sendo que, seu cômputo é divido grupos (9), subgrupos (19), 
+  itens (51) e subitens (377). 
+
+  - O peso de cada um desses grupos no índice cheio é definido mensalmente, de acordo com os gastos das  
+  famílias em diferentes bens e serviços. Estes gastos, por sua vez, são captados pela **Pesquisa de 
+  Orçamento Familiar (POF)**.
+
+
+
+
+
+  
+---
+&lt;div style="text-align: justify"&gt;
+
+
+## INTRODUÇÃO
+  
+
+**CONCEITOS**
+
+
+- Desde agosto de 1999 são 9 grupos:
+
+  1) **Alimentos e Bebidas**;
+  
+  2) **Habitação**;
+  
+  3) **Artigos de Residência**;
+  
+  4) **Vestuário**;
+  
+  5) **Transportes**;
+  
+  6) **Comunicação**;
+  
+  7) **Saúde e Cuidados Pessoais**;
+  
+  8) **Despesas Pessoais**;
+  
+  9) **Educação**.
+
+
+
+
+
+
+
+
+---
+
+
+## O BRASIL EM PERSPECTIVA
+
+
+<div id="htmlwidget-f33ecb650c1e2f28e461" style="width:100%;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f33ecb650c1e2f28e461">{"x":{"url":"index_files/figure-html//widgets/widget_unnamed-chunk-8.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
 
 
 ---
@@ -81,12 +587,120 @@ name: conceitoipca
 ## CONCEITO DE INFLAÇÃO
 
 
+
+
+
+
+
+
+---
+&lt;div style="text-align: justify"&gt;
+
+
+## CONCEITO DE INFLAÇÃO
+
+
+&lt;/br&gt;
+
+
+- **INFLAÇÃO**:
+
+  - A Inflação corresponde a uma situação em que há um aumento generalizado e persistente no nível de 
+  preços (pode ser captada pelos índices de preços);
+
+
+&lt;/br&gt;
+
+
+- **HIPERINFLAÇÃO**:
+
+  - Costuma-se definir como hiperinflação o aumento generalizado e persistente no nível de preços que 
+  segue uma trajetória elevada e acelerada (não há um nível estrito para se definir a hiperinflação).
+
+
+
+
+
+
+
+
+---
+
+
+## O BRASIL EM PERSPECTIVA
+
+
+<div id="htmlwidget-eec4e53f971e4b4699a1" style="width:100%;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-eec4e53f971e4b4699a1">{"x":{"url":"index_files/figure-html//widgets/widget_unnamed-chunk-9.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+
+
+
+
+
+
+
+
+---
+
+
+## O BRASIL EM PERSPECTIVA
+
+
+
+
+
+
+---
+&lt;div style="text-align: justify"&gt;
+
+
+## CONCEITO ASSOCIADOS À INFLAÇÃO
+
+
+&lt;/br&gt;
+
+
+- **DESINFLAÇÃO**:
+
+  - A desinflação corresponde a uma diminuição nas taxas de aumentos dos níveis de preço (os preços 
+  começam a aumentar de maneira menos acelerada);
+
+
+&lt;/br&gt;
+
+
+- **DEFLAÇÃO**:
+
+  - A deflação corresponde a uma situação em que há uma diminuição generalizada e persistente no 
+  nível de preços (repare que a definição de deflação depende da persistência).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ---
 class: inverse, center, middle 
 name: causas_inflacao
 
 
 ## CAUSAS DA INFLAÇÃO
+
 
 
 ---
@@ -189,29 +803,31 @@ name: brasil
 
 
 
----
-&lt;div style="text-align: justify"&gt;
 
 
-## INTRODUÇÃO
 
 
-**CONCEITOS**
 
 
-&lt;/br&gt;
-  
-  
-- Para entender o funcionamento básico da economia de um país é útil iniciar a apresentação por meio 
-da definição de 3 conceitos iniciais da macroeconomia, são eles:
-  
-&lt;/br&gt;
 
-  - **PRODUTO AGREGADO** (OU OFERTA AGREGADA);
-  
-  - **RENDA AGREGADA**;
-  
-  - **DEMANDA AGREGADA** (OU DESPESA AGREGADA/CONSUMO AGREGADO).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
 ---
