@@ -422,13 +422,33 @@ pesos_atuais <- grupo_ts20_21 %>%
 
 #---------------------------------------------------------------------------------------------------
 
-
+library(tidyverse)
 
 var_ipca_cheio <- BETS::BETSget(code = 433,
 
                                 data.frame = TRUE,
 
                                 from = '1990-01-01')
+
+
+var_ipca_cheio %>%
+
+  dplyr::mutate(data = lubridate::year(date)) %>%
+
+  dplyr::filter(data >= 2018) %>%
+
+  ggplot() +
+
+  geom_line(mapping = aes(x = date, y = value), size = 1) +
+
+  geom_point(mapping = aes(x = date, y = value), size = 1) +
+
+  labs(title = 'IPCA (variação mensal)',
+
+       x = 'Meses',
+
+       y = '%')
+
 
 
 
