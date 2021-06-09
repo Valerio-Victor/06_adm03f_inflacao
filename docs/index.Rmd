@@ -58,14 +58,6 @@ xaringanExtra::use_search(show_icon = TRUE)
 - [**CAUSAS DA INFLAÇÃO**](#causas_inflacao)
 
 
-</br>
-
-
-- [**O BRASIL EM PERSPECTIVA**](#brasil)
-
-
-
-
 
 
 
@@ -1110,6 +1102,64 @@ widgetframe::frameWidget(consolidado, width = '100%', height = '100%')
   - A deflação corresponde a uma situação em que há uma diminuição generalizada e persistente no 
   nível de preços (repare que a definição de deflação depende da persistência).
 
+  
+  
+
+
+
+
+  
+---
+
+
+## O BRASIL EM PERSPECTIVA
+
+
+```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', dpi = 300}
+
+library(magrittr, include.only = '%>%')
+
+
+ipca_ts <- sidrar::get_sidra(api = '/t/1737/n1/all/v/63,69,2266/p/all/d/v63%202,v69%202,v2266%2013') %>%
+  janitor::clean_names()
+
+
+acum_ano <- ipca_ts %>%
+  dplyr::filter(variavel == 'IPCA - Variação acumulada no ano') %>%
+  dplyr::transmute(data = zoo::as.yearmon(mes_codigo, format = '%Y %m'),
+                   valor = round(valor, 6)) %>%
+  dplyr::filter(data >= zoo::as.yearmon(1995, 01)) %>%
+  dplyr::mutate(Data = data,
+                Valor = valor) %>%
+  dplyr::select(Data, Valor)
+
+
+acum_ano <- acum_ano %>% 
+  ggplot2::ggplot() +
+  ggplot2::geom_line(mapping = ggplot2::aes(x = Data, y = Valor),
+                     colour = '#23395b',
+                     size = .5) +
+  ggplot2::geom_point(mapping = ggplot2::aes(x = Data, y = Valor),
+                      colour = '#23395b',
+                      size = .75) +
+  ggplot2::scale_y_continuous(labels = scales::number_format(suffix = '%'),
+                              limits = c(0, max(acum_ano$Valor))) +
+  ggplot2::labs(title = 'IPCA (Índice Cheio)',
+                x = 'Meses',
+                y = 'Acumulado no Ano',
+                caption = 'Dados: IBGE.') +
+  xaringanthemer::theme_xaringan(text_font_size = 15,
+                                 title_font_size = 20)
+
+
+acum_ano <- plotly::ggplotly(acum_ano)
+
+
+widgetframe::frameWidget(acum_ano, width = '100%', height = '100%')
+  
+  
+```
+
 
 
 
@@ -1177,6 +1227,24 @@ widgetframe::frameWidget(acum_ano, width = '100%', height = '100%')
 
 
 
+---
+<div style="text-align: justify">
+
+
+## CONCEITO ASSOCIADOS À INFLAÇÃO
+
+
+- Os itens do IPCA também podem ser "agrupados" a partir de outra estrutura, conforme segue:
+
+- **PREÇOS MONITORADOS (OU ADMINISTRADOS)**: O conjunto dos itens com preços administrados inclui 
+impostos e taxas (IPVA, IPTU e taxa de água e esgoto), serviços de utilidade pública cujas tarifas 
+são reguladas ou autorizadas pelo poder público por meio de agências reguladoras ou fiscalizadoras 
+(telefonia, energia elétrica, planos de saúde, pedágio), derivados de petróleo cujo mercado está em 
+processo de liberalização, mas tem como virtual formadora de preço uma empresa estatal, e itens cujos
+preços podem ser considerados virtualmente livres (álcool e passagens aéreas);
+
+- **PREÇOS LIVRES (OU DE MERCADO)**: O conjunto dos itens com preços formados a partir de fatores 
+de oferta e demanda.
 
 
 
@@ -1185,8 +1253,112 @@ widgetframe::frameWidget(acum_ano, width = '100%', height = '100%')
 
 
 
+---
 
 
+## O BRASIL EM PERSPECTIVA
+
+
+```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', dpi = 300}
+
+
+var_livres <- BETS::BETSget(code = 11428,
+                            data.frame = TRUE,
+                            from = '2000-01-01') %>% 
+  dplyr::rename('Data' = date,
+                'Livres' = value)
+
+
+var_monitor <- BETS::BETSget(code = 4449,
+                             data.frame = TRUE,
+                             from = '2000-01-01') %>% 
+  dplyr::rename('Data' = date,
+                'Monitorados' = value)
+
+
+consolidado <- dplyr::left_join(var_livres, var_monitor, by = c('Data' = 'Data')) %>% 
+  tidyr::pivot_longer(-Data, names_to = 'Componente', values_to = 'Valor')
+
+
+
+consolidado <- consolidado %>% 
+  ggplot2::ggplot() +
+  ggplot2::geom_line(mapping = ggplot2::aes(x = Data, y = Valor, color = Componente),
+                     size = .5) +
+  ggplot2::geom_point(mapping = ggplot2::aes(x = Data, y = Valor, color = Componente),
+                      size = .75) +
+  ggplot2::scale_y_continuous(labels = scales::number_format(suffix = '%'),
+                              limits = c(0, max(consolidado$Valor))) +
+  ggplot2::labs(title = 'Preços Livres x Preços Monitorados',
+                lab = '',
+                x = 'Meses',
+                y = 'Variação Mensal',
+                caption = 'Dados: IBGE.') +
+  xaringanthemer::theme_xaringan(text_font_size = 15,
+                                 title_font_size = 20)
+
+
+consolidado <- plotly::ggplotly(consolidado)
+
+
+widgetframe::frameWidget(consolidado, width = '100%', height = '100%')
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
+---
+<div style="text-align: justify">
+
+
+## CONCEITO ASSOCIADOS À INFLAÇÃO
+
+
+- Por sua vez, os preços livres também podem ser dividios de acordo com o grau de comercialização 
+com o resto do mundo.
+
+
+- **COMERCIALIZÁVEIS**:
+
+  - alimentos industrializados e semi-elaborados, artigos de limpeza, higiene e beleza, mobiliário, 
+  utensílios domésticos, equipamentos eletro-eletrônicos, aquisição de veículos, cama/mesa/banho, 
+  fumo e bebidas, vestuário, remédios e material escolar;
+
+
+- **NÃO-COMERCIALIZÁVEIS**:
+
+  - produtos in natura, alimentação fora do domicílio, aluguel, linha telefônica, habitação-despesas
+  operacionais, veículos-seguro/reparos/lavagem/estacionamento, recreação e cultura, matrícula e 
+  mensalidade escolar, livros didáticos, serviços médicos e serviços pessoais.Monitorados: serviços 
+  públicos e residenciais, transporte público, combustíveis, plano de saúde, pedágio, licenciamento 
+  e empregado doméstico.
+
+
+
+
+
+
+
+
+---
+
+
+## O BRASIL EM PERSPECTIVA
+
+
+```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', dpi = 300}
+
+
+```
 
 
 
@@ -1224,12 +1396,6 @@ name: causas_inflacao
 
 
 
----
-class: inverse, center, middle 
-name: brasil
-
-
-## O BRASIL EM PERSPECTIVA
 
 
 
