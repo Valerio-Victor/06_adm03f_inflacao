@@ -55,7 +55,7 @@ xaringanExtra::use_search(show_icon = TRUE)
 </br>
 
 
-- [**CAUSAS DA INFLAÇÃO**](#causas_inflacao)
+- [**CAUSAS E CONSEQUÊNCIAS DA INFLAÇÃO**](#causas_inflacao)
 
 
 
@@ -1358,27 +1358,50 @@ com o resto do mundo.
 ```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', dpi = 300}
 
 
+
+var_comerc <- BETS::BETSget(code = 4447,
+                            data.frame = TRUE,
+                            from = '2000-01-01')%>% 
+  dplyr::rename('Data' = date,
+                'Comercializáveis' = value)
+
+
+var_n_comerc <- BETS::BETSget(code = 4448,
+                              data.frame = TRUE,
+                              from = '2000-01-01')%>% 
+  dplyr::rename('Data' = date,
+                'Não Comercializáveis' = value)
+
+
+consolidado <- dplyr::left_join(var_comerc, var_n_comerc, by = c('Data' = 'Data')) %>% 
+  tidyr::pivot_longer(-Data, names_to = 'Componente', values_to = 'Valor')
+
+
+consolidado <- consolidado %>% 
+  ggplot2::ggplot() +
+  ggplot2::geom_line(mapping = ggplot2::aes(x = Data, y = Valor, color = Componente),
+                     size = .5) +
+  ggplot2::geom_point(mapping = ggplot2::aes(x = Data, y = Valor, color = Componente),
+                      size = .75) +
+  ggplot2::scale_y_continuous(labels = scales::number_format(suffix = '%'),
+                              limits = c(0, max(consolidado$Valor))) +
+  ggplot2::labs(title = 'Comercializáveis x Não Comercializáveis',
+                lab = '',
+                x = 'Meses',
+                y = 'Variação Mensal',
+                caption = 'Dados: IBGE.') +
+  xaringanthemer::theme_xaringan(text_font_size = 15,
+                                 title_font_size = 20)
+
+
+consolidado <- plotly::ggplotly(consolidado)
+
+
+widgetframe::frameWidget(consolidado, width = '100%', height = '100%')
+
+
+
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1392,7 +1415,7 @@ class: inverse, center, middle
 name: causas_inflacao
 
 
-## CAUSAS DA INFLAÇÃO
+## CAUSAS E CONSEQUÊNCIAS DA INFLAÇÃO
 
 
 
@@ -1401,6 +1424,55 @@ name: causas_inflacao
 
 
 
+---
+<div style="text-align: justify">
+
+
+## CAUSAS E CONSEQUÊNCIAS DA INFLAÇÃO
+
+
+</br>
+
+
+- Pode-se elencar alguns fatores para aumento do nível de preços (generalizado e consistente), 
+principalmente:
+
+ - **Inflação de Demanda**;
+ - **Inflação de Custos**;
+ - **Choque de Oferta**;
+ - **Inflação Inercial**.
+ 
+ 
+ </br>
+
+
+- Todos os fatores referidos acima podem, inclusive, ocorrer simultaneamente. Em maior ou menor 
+impacto de cada um deles.
+
+
+
+
+
+---
+<div style="text-align: justify">
+
+
+## CAUSAS E CONSEQUÊNCIAS DA INFLAÇÃO
+
+
+</br>
+
+- **Inflação de Demanda**: Quando a economia está “muito aquecida” (nível alto de consumo) os 
+produtores tendem a aumentar os preços dos bens objetivando obter maior nível de lucro.
+
+
+```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', dpi = 300, fig.width = '100%'}
+
+
+knitr::include_graphics('../figuras/demanda.png')
+
+
+```
 
 
 
@@ -1409,6 +1481,22 @@ name: causas_inflacao
 
 
 
+---
+<div style="text-align: justify">
+
+
+## CAUSAS E CONSEQUÊNCIAS DA INFLAÇÃO
+
+
+</br>
+
+- **Inflação de Custos**: Quando o sistema produtivo é ineficiente, os custos de produção são 
+inerentemente maiores. Estes custos de produção são repassados aos bens finais. 
+
+
+```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', dpi = 300}
+
+```
 
 
 
@@ -1417,6 +1505,22 @@ name: causas_inflacao
 
 
 
+---
+<div style="text-align: justify">
+
+
+## CAUSAS E CONSEQUÊNCIAS DA INFLAÇÃO
+
+
+</br>
+
+- **Choque de Oferta**: Quando um fator inesperado (exógeno) causa uma diminuição no nível de 
+produção e/ou oferta. Com menor quantidade do bem no mercado, seu preço aumenta.
+
+
+```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', dpi = 300}
+
+```
 
 
 
@@ -1425,6 +1529,23 @@ name: causas_inflacao
 
 
 
+---
+<div style="text-align: justify">
+
+
+## CAUSAS E CONSEQUÊNCIAS DA INFLAÇÃO
+
+
+</br>
+
+
+- **Inflação Inercial**: Quando a inflação de um período é repassada contratualmente para o período 
+posterior devido as expectativas dos agentes de permanência da inflação.
+
+
+```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', dpi = 300}
+
+```
 
 
 
@@ -1433,8 +1554,78 @@ name: causas_inflacao
 
 
 
+---
+<div style="text-align: justify">
 
 
+## CAUSAS E CONSEQUÊNCIAS DA INFLAÇÃO
+
+
+</br>
+
+
+
+- Para se **combater a inflação** existem, pelo menos, três grupos de **políticas**:
+
+  - **Modificações Legais e Institucionais**: Diminuição da indexação de preços de bens finais; 
+  diminuição dos preços dos fatores de produção; 
+
+  - **Modificações Estruturais**: Redução da quantidade de moeda em circulação; Redução do déficit 
+  público; Aumento da taxa de juros;
+
+  - **Modificações Inerciais**: Alteração nas expectativas dos agentes.
+
+
+
+
+
+
+
+
+---
+<div style="text-align: justify">
+
+
+## CAUSAS E CONSEQUÊNCIAS DA INFLAÇÃO
+
+
+</br>
+
+
+- Também devido a inflação, **não se pode comparar valores monetários de maneira direta** (chamados 
+**valores nominais**);
+
+
+</br>
+
+
+- Esta comparação direta é definida como **ilusão monetária**.
+
+
+
+
+
+
+
+
+---
+<div style="text-align: justify">
+
+
+## CAUSAS E CONSEQUÊNCIAS DA INFLAÇÃO
+
+
+</br>
+
+
+- Assim, valores monetários diferentes representam "poderes de compra" diferentes de acordo com os 
+períodos e/ou regiões analisadas;
+
+
+</br>
+
+
+- Neste sentido, **é necessário realizar uma "correção monetária"** de modo que os **valores nominais**.
 
 
 
