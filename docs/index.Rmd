@@ -1141,7 +1141,10 @@ acum_ano <- ipca_ts %>%
   dplyr::filter(data >= zoo::as.yearmon(1995, 01)) %>%
   dplyr::mutate(Data = lubridate::year(data),
                 Valor = valor) %>%
-  dplyr::select(Data, Valor) %>% 
+  dplyr::select(Data, Valor)
+
+
+acum_ano <- acum_ano %>% 
   ggplot2::ggplot() +
   ggplot2::geom_line(mapping = ggplot2::aes(x = Data, y = Valor),
                      colour = '#23395b',
@@ -1149,7 +1152,8 @@ acum_ano <- ipca_ts %>%
   ggplot2::geom_point(mapping = ggplot2::aes(x = Data, y = Valor),
                       colour = '#23395b',
                       size = .75) +
-  ggplot2::scale_y_continuous(labels = scales::number_format(suffix = '%')) +
+  ggplot2::scale_y_continuous(labels = scales::number_format(suffix = '%'),
+                              limits = c(0, max(acum_ano$Valor))) +
   ggplot2::labs(title = 'IPCA (Índice Cheio)',
                 x = 'Meses',
                 y = 'Acumulado no Ano',
@@ -1162,9 +1166,6 @@ acum_ano <- plotly::ggplotly(acum_ano)
 
 
 widgetframe::frameWidget(acum_ano, width = '100%', height = '100%')
-  
-  
-  
   
   
 ```
