@@ -383,12 +383,11 @@ acm_mensal <- rbind(acm_infla_02,
                     acm_infla_04)
 
 
-
 pesos_atuais <- grupo_ts20_21 %>%
 
   dplyr::filter(variavel == 'IPCA - Peso mensal',
 
-                mes_codigo == 202104) %>%
+                mes_codigo == 202105) %>%
 
   dplyr::select(mes_codigo, valor, geral_grupo_subgrupo_item_e_subitem) %>%
 

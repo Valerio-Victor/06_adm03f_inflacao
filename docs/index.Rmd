@@ -876,6 +876,90 @@ widgetframe::frameWidget(var_ipca_cheio, width = '100%', height = '100%')
 ---
 
 
+## O BRASIL EM PERSPECTIVA: PESOS ÍNDICE INFLAÇÃO
+
+
+```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', dpi = 300}
+
+
+library(magrittr, include.only = '%>%')
+
+
+grupo_ts20_21 <- sidrar::get_sidra(api = '/t/7060/n1/all/v/63,66,69/p/all/c315/7170,7445,7486,7558,7625,7660,7712,7766,7786/d/v63%202,v66%204,v69%202') %>%
+
+  janitor::clean_names()
+
+
+pesos <- grupo_ts20_21 %>%
+
+  dplyr::filter(variavel == 'IPCA - Peso mensal',
+
+                mes_codigo == 202105) %>%
+
+  dplyr::select(mes_codigo, valor, geral_grupo_subgrupo_item_e_subitem) %>%
+
+  dplyr::rename('data' = mes_codigo,
+
+                'Valor' = valor,
+
+                'Grupos' = geral_grupo_subgrupo_item_e_subitem) %>%
+
+  dplyr::transmute(Grupos = dplyr::case_when(Grupos == '1.Alimentação e bebidas' ~ 'Alimentação e bebidas',
+
+                                          Grupos == '2.Habitação' ~ 'Habitação',
+
+                                          Grupos == '3.Artigos de residência' ~ 'Artigos de residência',
+
+                                          Grupos == '4.Vestuário' ~ 'Vestuário',
+
+                                          Grupos == '5.Transportes' ~ 'Transportes',
+
+                                          Grupos == '6.Saúde e cuidados pessoais' ~ 'Saúde e cuidados pessoais',
+
+                                          Grupos == '7.Despesas pessoais' ~ 'Despesas pessoais',
+
+                                          Grupos == '8.Educação' ~ 'Educação',
+
+                                          Grupos == '9.Comunicação' ~ 'Comunicação'),
+
+                Valor = round(Valor, 2)) %>% 
+  
+  dplyr::mutate(Grupos = forcats::fct_reorder(Grupos, Valor)) %>% 
+  
+  ggplot2::ggplot() +
+  
+  ggplot2::geom_col(mapping = ggplot2::aes(y = Grupos, x = Valor), stat = 'identity') +
+  
+  ggplot2::labs(title = 'Pesos dos Grupos do Índice de Inflação',
+                
+                x = '(%)',
+                
+                y = '',
+                
+                fill = 'Pesos por Grupos') +
+  
+  xaringanthemer::theme_xaringan(text_font_size = 15,
+                                 
+                                 title_font_size = 20) 
+
+pesos <- plotly::ggplotly(pesos)
+  
+
+widgetframe::frameWidget(pesos, width = '100%', height = '100%')
+
+
+```
+
+
+
+
+
+
+
+
+---
+
+
 ## O BRASIL EM PERSPECTIVA
 
 
