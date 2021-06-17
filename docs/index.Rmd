@@ -752,7 +752,7 @@ ipca <- ipca_ts %>%
                                  title_font_size = 20)
 
 
-ipca  <- plotly::ggplotly(ipca )
+ipca  <- plotly::ggplotly(ipca)
 
 
 widgetframe::frameWidget(ipca , width = '100%', height = '100%')
@@ -1469,7 +1469,7 @@ produtores tendem a aumentar os preços dos bens objetivando obter maior nível 
 ```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', out.width = '100%'}
 
 
-knitr::include_graphics('../figuras/demanda.png', dpi = 300)
+knitr::include_graphics('demanda.png', dpi = 300)
 
 
 ```
@@ -1497,7 +1497,7 @@ inerentemente maiores. Estes custos de produção são repassados aos bens finai
 ```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', out.width = '40%'}
 
 
-knitr::include_graphics('../figuras/custos.png', dpi = 300)
+knitr::include_graphics('custos.png', dpi = 300)
 
 
 ```
@@ -1525,7 +1525,7 @@ produção e/ou oferta. Com menor quantidade do bem no mercado, seu preço aumen
 ```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', out.width = '80%'}
 
 
-knitr::include_graphics('../figuras/choque_oferta.png', dpi = 300)
+knitr::include_graphics('choque_oferta.png', dpi = 300)
 
 
 ```
@@ -1554,7 +1554,7 @@ posterior devido as expectativas dos agentes de permanência da inflação.
 ```{r, warning = F,message = F, error = F, echo = F, fig.align = 'center', out.width = '60%'}
 
 
-knitr::include_graphics('../figuras/inercial.png', dpi = 300)
+knitr::include_graphics('inercial.png', dpi = 300)
 
 
 ```
